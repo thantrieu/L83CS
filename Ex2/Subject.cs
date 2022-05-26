@@ -3,7 +3,7 @@
     // lớp mô tả thông tin môn học
     class Subject
     {
-        private static int autoId = 10001;
+        private static int autoId = 11001;
         public int SubjectId { get; set; }
         public string Name { get; set; }
         public int Credit { get; set; }
