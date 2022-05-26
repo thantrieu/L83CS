@@ -11,6 +11,13 @@ namespace ExercisesLesson83
             return regex.IsMatch(email);
         }
 
+        public bool IsEmpIdValid(string empId)
+        {
+            var pattern = @"^EMP\d{4}$";
+            var regex = new Regex(pattern, RegexOptions.IgnoreCase);
+            return regex.IsMatch(empId);
+        }
+
         public bool IsNameValid(string name)
         {
             var pattern = @"^[\p{L}]+[\p{L} ]*$";

@@ -20,18 +20,27 @@ namespace ExercisesLesson83
 
         public bool RemoveById(BaseEmployee[] employees, string id)
         {
-            for (int i = 0; i < employees.Length; i++)
+            Console.WriteLine("==> Bạn có chắc chắn muốn xóa không(Y/N)?");
+            var ans = Console.ReadLine().ToLower()[0];
+            if (ans == 'y')
             {
-                if (employees[i] != null && employees[i].EmpId.CompareTo(id) == 0)
+                for (int i = 0; i < employees.Length; i++)
                 {
-                    // chuyển các nhân viên phía phải của nhân viên bị xóa sang trái 1 vị trí
-                    // để danh sách nhân viên liền mạch không null
-                    for (int j = i; j < employees.Length - 1; j++)
+                    if (employees[i] != null && employees[i].EmpId.CompareTo(id) == 0)
                     {
-                        employees[j] = employees[j + 1];
+                        // chuyển các nhân viên phía phải của nhân viên bị xóa sang trái 1 vị trí
+                        // để danh sách nhân viên liền mạch không null
+                        for (int j = i; j < employees.Length - 1; j++)
+                        {
+                            employees[j] = employees[j + 1];
+                        }
+                        return true;
                     }
-                    return true;
                 }
+            }
+            else
+            {
+                Console.WriteLine("==> Hành động xóa bị hủy bỏ. <==");
             }
             return false;
         }

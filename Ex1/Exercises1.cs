@@ -17,6 +17,7 @@ namespace ExercisesLesson83
             EmployeeUtils utils = new EmployeeUtils();
             BaseEmployee[] employees = new Employee[100];
             int numOfEmployee = 0; // số lượng nhân viên
+            var filter = new Filter();
             utils.CreateFakeData(employees, ref numOfEmployee);
 
             int choice;
@@ -159,16 +160,27 @@ namespace ExercisesLesson83
                         if (numOfEmployee > 0)
                         {
                             Console.WriteLine("Nhập mã nhân viên cần xóa: ");
-                            var id = Console.ReadLine().ToUpper();
-                            var result = utils.RemoveById(employees, id);
-                            if (result)
+                            try
                             {
-                                Console.WriteLine("==> Xóa thành công! <==");
-                                numOfEmployee--;
+                                var id = Console.ReadLine().ToUpper().Trim();
+                                if (!filter.IsEmpIdValid(id))
+                                {
+                                    throw new InvalidEmployeeIdException("Mã nhân viên không hợp lệ.", id);
+                                }
+                                var result = utils.RemoveById(employees, id);
+                                if (result)
+                                {
+                                    Console.WriteLine("==> Xóa thành công! <==");
+                                    numOfEmployee--;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("==> Xóa thất bại. Nhân viên cần xóa không tồn tại. <==");
+                                }
                             }
-                            else
+                            catch (InvalidEmployeeIdException e)
                             {
-                                Console.WriteLine("==> Xóa thất bại. Nhân viên cần xóa không tồn tại. <==");
+                                Console.WriteLine(e);
                             }
                         }
                         else
